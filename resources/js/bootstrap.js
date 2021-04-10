@@ -36,12 +36,13 @@ window.Pusher = require('pusher-js');
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    forceTLS: true
+    wsHost:'127.0.0.1',
+    wsPort:6001,
+    forceTLS: false,
+    disableStats: true,
 });
 
 window.Echo.channel('chats')
-    .listen('Chats', (e) => {
-        console.log(e);
-    });
-
+.listen('Chats', (e) => {
+    console.log(e);
+});

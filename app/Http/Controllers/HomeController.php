@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        event(new Chats());
+        event(new Chats(auth()->user()));
         return view('home');
     }
 }
