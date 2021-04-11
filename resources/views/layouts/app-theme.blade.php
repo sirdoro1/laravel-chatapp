@@ -37,8 +37,8 @@
   <link rel="stylesheet" href="{{asset('theme/plugins/summernote/summernote-bs4.min.css')}}">
 </head>
 
-<body id="app" class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<body  class="hold-transition sidebar-mini layout-fixed">
+<div id="app" class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
@@ -222,6 +222,7 @@
 <script src="{{asset('theme/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{asset('theme/dist/js/adminlte.js')}}"></script>
 <script src="{{asset('theme/dist/js/demo.js')}}"></script>
+@yield('script')
 {{-- <script src="{{asset('theme/dist/js/pages/dashboard.js')}}"></script> --}}
 </body>
 

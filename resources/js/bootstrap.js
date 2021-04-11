@@ -42,7 +42,3 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
-window.Echo.channel('chats')
-.listen('Chats', (e) => {
-    console.log(e);
-});

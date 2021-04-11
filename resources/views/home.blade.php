@@ -312,9 +312,24 @@
 
 @section('script')
 <script>
-    window.Echo.channel('chats')
-    .listen('Chats', (e) => {
-        console.log(e);
+    $('document').ready(function(e){
+
+        // let view = new Vue({
+        //     data: {},
+        //     created(){
+
+        //     },
+        //     methods: {
+
+        //     },
+        //     computed:{
+
+        //     },
+        // })
+        Echo.channel('chats')
+             .listen('Chats', (e) => {
+                 console.log(e);
+         });
     });
 </script>
 @endsection
