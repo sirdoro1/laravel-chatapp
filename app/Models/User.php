@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Chats;
 
 class User extends Authenticatable
 {
@@ -40,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendChats()
+    {
+        return $this->hasMany(Chats::class,'sender_id');
+    }
+
+    public function receiveChats()
+    {
+        return $this->hasMany(CHats::class,'receiver_id');
+    }
 }

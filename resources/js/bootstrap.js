@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('vue-chat-scroll');
 } catch (e) {}
 
 /**

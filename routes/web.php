@@ -18,7 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/chats', [App\Http\Controllers\ChatsController::class, 'index'])->name('chats');
+Route::post('/message', [App\Http\Controllers\ChatsController::class, 'sendMessage'])->name('send-message');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Auth::routes();
