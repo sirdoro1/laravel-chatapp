@@ -141,7 +141,6 @@
                         method: 'GET',
                     }).then((res)=>{
                         this.chats = res.data;
-                        console.log(this.chats);
                     }).catch((err)=>{
                         console.log(err);
                     });
@@ -151,7 +150,13 @@
         Echo.private(`chats.{{auth()->id()}}`)
              .listen('Chats', (e) => {
                  let vm = view;
-                 vm.$data.chats.push(e.chats);
+                //  console.log(vm.$data.chats.length);
+                // e.chats['id'] = vm.$data.chats.length;
+                vm.$data.chats = [...vm.$data.chats,e.chats]
+                // console.log(vm.$data.chats);
+                console.log(e.chats);
+                //  Vue.set(vm.$data.chats,vm.$data.chats.length+1,e.chats)
+                //  vm.$data.chats.push(e.chats);
                 //  console.log(vm.$data.chats.push(e.chats));
                 //  vm.chats.push(e.chats)
                 // //  console.log(this.chats);
