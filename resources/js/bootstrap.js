@@ -9,8 +9,8 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
     window.encodeEntities = require('html-entities');
+    window.moment = require('moment');
 
     require('bootstrap');
     require('vue-chat-scroll');
@@ -33,6 +33,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 import Echo from 'laravel-echo';
+import Vue from 'vue';
 
 window.Pusher = require('pusher-js');
 
@@ -44,4 +45,10 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
+
+Vue.filter('formatDateTime',function(value){
+    if(value){
+        return moment(String(value)).format('MM-DD-YYYY hh:mm')
+    }
+})
 

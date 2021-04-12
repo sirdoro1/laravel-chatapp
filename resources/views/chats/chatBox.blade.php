@@ -53,11 +53,11 @@
                 <!-- Conversations are loaded here -->
                 <div class="direct-chat-messages" v-if="chats" v-chat-scroll>
                   <!-- Message. Default to the left -->
-                  <div class="direct-chat-msg" v-for="(chat,index) in chats" :key="index">
+                  <div class="direct-chat-msg" v-for="(chat,index) in chats" v-if="chat.sender_id == {{auth()->id()}}" :key="index">
 
                     <div class="direct-chat-infos clearfix">
                       <span class="direct-chat-name float-left"></span>
-                      <span class="direct-chat-timestamp float-right">@{{chat.created_at}}</span>
+                      <span class="direct-chat-timestamp float-right">@{{chat.created_at|formatDateTime}}</span>
                     </div>
                     <!-- /.direct-chat-infos -->
                     <img class="direct-chat-img" src="{{asset('theme/dist/img/user1-128x128.jpg')}}" alt="message user image">
@@ -65,20 +65,31 @@
                     <div class="direct-chat-text" v-html="chat.messages"></div>
                     <!-- /.direct-chat-text -->
                   </div>
+                   <!-- Message to the right -->
+                  <div class="direct-chat-msg right" v-else>
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right"></span>
+                      <span class="direct-chat-timestamp float-left">@{{chat.created_at|formatDateTime}}</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <img class="direct-chat-img" src="{{asset('theme/dist/img/user3-128x128.jpg')}}" alt="message user image">
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text" v-html="chat.messages"></div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+
                 </div>
                 <div class="direct-chat-contacts"></div>
                 <!--/.direct-chat-messages-->
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <form action="#" method="post">
                   <div class="input-group">
-                    <input type="text" name="message" v-model="message" placeholder="Type Message ..." class="form-control">
+                    <input type="text" name="message" v-model="message" v-on:keyup.shift.enter="sendMessage" placeholder="Type Message ..." class="form-control">
                     <span class="input-group-append">
                       <button type="button" class="btn btn-primary" @click="sendMessage">Send</button>
                     </span>
                   </div>
-                </form>
               </div>
               <!-- /.card-footer-->
             </div>
