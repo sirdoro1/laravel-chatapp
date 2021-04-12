@@ -42,9 +42,10 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost:'127.0.0.1',
     wsPort:6001,
+    wssPort:6001,
     forceTLS: false,
     disableStats: true,
-    enabledTransports: ['ws']
+    enabledTransports: ['ws','wss']
 });
 
 Vue.filter('formatDateTime',function(value){
