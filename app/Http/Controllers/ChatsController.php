@@ -66,12 +66,7 @@ class ChatsController extends Controller
             ->where('receiver_id',$receiver->id)
                 ->orWhere(function($query) use ($receiver){
                     $query->where('sender_id',$receiver->id)->where('receiver_id',auth()->id());
-                })->with(['sender' =>function($query){
-                    $query->select(['id','name']);
-                },
-                'receiver' => function ($query) {
-                    $query->select(['id', 'name']);
-                }])->get();
+                })->get(['created_at', 'sender_id', 'receiver_id', 'messages', 'status']);
             return response()->json($messages,200);
     }
 }

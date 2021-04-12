@@ -115,7 +115,19 @@
             },
             methods: {
                 sendMessage(){
+
                     if(this.message){
+
+                        var data = {
+                            created_at : '{{now()}}',
+                            sender_id : '{{auth()->id()}}',
+                            receiver_id : '{{$receiver->id}}',
+                            messages : this.message,
+                            status : 0
+                        };
+
+                        this.chats.push(data);
+
                         axios({
                             url:"{{url('/message')}}",
                             method: 'POST',
@@ -150,19 +162,8 @@
         Echo.private(`chats.{{auth()->id()}}`)
              .listen('Chats', (e) => {
                  let vm = view;
-                //  console.log(vm.$data.chats.length);
-                // e.chats['id'] = vm.$data.chats.length;
                 vm.$data.chats = [...vm.$data.chats,e.chats]
-                // console.log(vm.$data.chats);
                 console.log(e.chats);
-                //  Vue.set(vm.$data.chats,vm.$data.chats.length+1,e.chats)
-                //  vm.$data.chats.push(e.chats);
-                //  console.log(vm.$data.chats.push(e.chats));
-                //  vm.chats.push(e.chats)
-                // //  console.log(this.chats);
-                //  console.log(e.chats);
-                //  console.log('+++++++++++++++++++++++++++++++++++++++++++++++++')
-                //  console.log(e);
          });
     });
 </script>

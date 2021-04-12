@@ -33,12 +33,7 @@ class Chats implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'chats' => $this->chat
-            ->load(['sender'=> function($query){
-                $query->select(['id','name']);
-            }, 'receiver' => function ($query) {
-                $query->select(['id', 'name']);
-            },]),
+            'chats' => $this->chat->only(['created_at','sender_id','receiver_id','messages','status']),
         ];
     }
 
