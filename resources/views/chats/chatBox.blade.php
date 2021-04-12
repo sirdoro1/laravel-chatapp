@@ -62,9 +62,7 @@
                     <!-- /.direct-chat-infos -->
                     <img class="direct-chat-img" src="{{asset('theme/dist/img/user1-128x128.jpg')}}" alt="message user image">
                     <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      @{{chat.messages}}
-                    </div>
+                    <div class="direct-chat-text" v-html="chat.messages"></div>
                     <!-- /.direct-chat-text -->
                   </div>
                 </div>
@@ -117,12 +115,11 @@
                 sendMessage(){
 
                     if(this.message){
-
                         var data = {
                             created_at : '{{now()}}',
                             sender_id : '{{auth()->id()}}',
                             receiver_id : '{{$receiver->id}}',
-                            messages : this.message,
+                            messages : encodeEntities.encode(this.message),
                             status : 0
                         };
 
@@ -163,7 +160,6 @@
              .listen('Chats', (e) => {
                  let vm = view;
                 vm.$data.chats = [...vm.$data.chats,e.chats]
-                console.log(e.chats);
          });
     });
 </script>
