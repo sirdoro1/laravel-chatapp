@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 class Chats implements ShouldBroadcast
 {
-    public $chat;
-    public $user;
+    protected $chat;
+    protected $user;
+    protected $receiver;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,10 +23,22 @@ class Chats implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user,$chat)
+    public function __construct($user,$chat,$receiver)
     {
         $this->user = $user;
         $this->chat = $chat;
+        $this->receiver = $receiver;
+    }
+
+    public function broadcastWith()
+    {
+        return [
+            'chats' => $this->chat->with(['sender'=> function($query){
+                $query->select(['id','name']);
+            }, 'receiver' => function ($query) {
+                $query->select(['id', 'name']);
+            },])->first(),
+        ];
     }
 
     /**
@@ -35,7 +48,6 @@ class Chats implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chats');
-        // return new PrivateChannel('chats'.$this->chat->id);
+        return new PrivateChannel('chats.'.$this->receiver->id);
     }
 }

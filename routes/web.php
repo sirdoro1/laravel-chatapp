@@ -21,6 +21,9 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/chats', [App\Http\Controllers\ChatsController::class, 'index'])->name('chats');
+Route::get('/chats/{receiver}', [App\Http\Controllers\ChatsController::class, 'chatsBox'])->name('chats');
+Route::get('/contacts', [App\Http\Controllers\ChatsController::class, 'contactList'])->name('contacts');
+Route::get('/message/{receiver}', [App\Http\Controllers\ChatsController::class, 'fetchMessage'])->name('fetch-message');
 Route::post('/message', [App\Http\Controllers\ChatsController::class, 'sendMessage'])->name('send-message');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

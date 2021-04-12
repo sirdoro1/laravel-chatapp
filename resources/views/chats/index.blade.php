@@ -324,6 +324,10 @@
                         axios({
                             url:"{{url('/message')}}",
                             method: 'POST',
+                            data:{
+                                messages: this.messages,
+                                receiver_id:''
+                            },
                         }).then((res)=>{
                             if(res.status == 200){
                                 this.message = '';

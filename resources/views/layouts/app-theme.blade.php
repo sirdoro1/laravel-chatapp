@@ -204,7 +204,7 @@
 </div>
 <!-- ./wrapper -->
 
-<script src="{{('theme/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('theme/plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('theme/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);

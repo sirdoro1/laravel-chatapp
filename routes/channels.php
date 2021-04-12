@@ -14,6 +14,6 @@ use App\Models\Chat;
 |
 */
 
-Broadcast::channel('chat', function ($user , $id) {
+Broadcast::channel('chats.{receiverId}', function () {
     return true;
 });
